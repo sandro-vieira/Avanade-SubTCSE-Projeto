@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Aggregates\Employee\Interfaces\Repositories\" />
     <Folder Include="Aggregates\Employee\ValueObjects\" />
-    <Folder Include="Aggregates\Employee\Validators\" />
   </ItemGroup>
 
   <ItemGroup>
