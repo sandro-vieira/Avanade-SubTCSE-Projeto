@@ -61,6 +61,7 @@ namespace Avanade.SubTCSE.Projeto.Api.Controllers
             return Ok(item);
         }
 
+        [HttpDelete(template: "{id}")]
         public async Task<IActionResult> DeleteById(string id)
         {
             //TODO: Desafio
