@@ -2,6 +2,7 @@
 using Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Interfaces.Services;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
@@ -10,6 +11,14 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
     {
         private readonly IValidator<Entities.EmployeeRole> _validator;
         private readonly IEmployeeRoleRepository _employeeRoleRepository;
+
+        public EmployeeRoleService(
+            IValidator<Entities.EmployeeRole> validator, 
+            IEmployeeRoleRepository employeeRoleRepository)
+        {
+            _validator = validator;
+            _employeeRoleRepository = employeeRoleRepository;
+        }
 
         public async Task<Entities.EmployeeRole> AddEmployeeRoleAsync(Entities.EmployeeRole employeeRole)
         {
@@ -25,8 +34,18 @@ namespace Avanade.SubTCSE.Projeto.Domain.Aggregates.EmployeeRole.Services
                 return employeeRole;
             }
 
-            await _employeeRoleRepository.Add(employeeRole);
+            await _employeeRoleRepository.AddAsync(employeeRole);
             return employeeRole;
+        }
+
+        public async Task<List<Entities.EmployeeRole>> GetAllAsync()
+        {
+            return await _employeeRoleRepository.FindAllAsync();
+        }
+
+        public async Task<Entities.EmployeeRole> GetById(string id)
+        {
+            return await _employeeRoleRepository.FindByIdAsync(id);
         }
     }
 }
